@@ -1,0 +1,8 @@
+{
+  "comercial": ["Comercial", "vendedor"],
+  "compras": ["Compras", "suprimentos"],
+  "diretoria": ["Diretoria", "sócio"],
+  "engenharia": ["Engenharia", "engenheiro", "eng. responsável"],
+  "financeiro": ["Financeiro", "contas a pagar"],
+  "obra": ["Obra", "mestre de obras", "equipe de obra"]
+}

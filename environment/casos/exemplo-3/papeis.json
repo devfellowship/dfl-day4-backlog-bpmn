@@ -1,0 +1,6 @@
+{
+  "credito": ["Crédito", "analista de crédito"],
+  "diretoria": ["Diretoria", "diretor"],
+  "logistica": ["Logística", "expedição"],
+  "vendas": ["Vendas", "vendedor", "comercial"]
+}

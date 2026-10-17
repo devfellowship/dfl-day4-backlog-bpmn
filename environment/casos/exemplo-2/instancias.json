@@ -1,0 +1,8 @@
+{
+  "instancias": [
+    { "id": "PC-101", "chegada": "D1 08:00", "dados": { "valor": 5000 }, "retrabalhos": { "H9": 2 } },
+    { "id": "PC-102", "chegada": "D1 08:00", "dados": { "valor": 4999 }, "retrabalhos": {} },
+    { "id": "PC-103", "chegada": "D1 09:30", "dados": { "valor": 12000 }, "retrabalhos": { "H9": 1 } },
+    { "id": "PC-104", "chegada": "D1 11:50", "dados": { "valor": 800 }, "retrabalhos": {} }
+  ]
+}

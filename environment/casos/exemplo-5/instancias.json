@@ -1,0 +1,8 @@
+{
+  "instancias": [
+    { "id": "OB-1", "chegada": "D1 08:00", "dados": { "valor": 80000, "pendencias": 2 }, "retrabalhos": { "H8": 1, "H16": 5 } },
+    { "id": "OB-2", "chegada": "D1 08:00", "dados": { "valor": 50000, "pendencias": 0 }, "retrabalhos": { "H16": 2 } },
+    { "id": "OB-3", "chegada": "D1 10:00", "dados": { "valor": 120000, "pendencias": 1 }, "retrabalhos": { "H8": 2 } },
+    { "id": "OB-4", "chegada": "D2 08:00", "dados": { "valor": 30000, "pendencias": 3 }, "retrabalhos": { "H16": 1 } }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "task": {
+    "name": "dfl/day4-backlog-bpmn",
+    "version": "1",
+    "description": "Pipeline de analista de processos: backlog de histórias com pequenas regras vira processo BPMN (raias com apelidos, fluxos, gateways, caminho crítico, insights), depois roda instâncias reais com retrabalho limitado, simula fila FIFO por raia com pessoas e expediente e mede o processo TO-BE otimizado.",
+    "authors": [
+      {
+        "name": "DFL"
+      }
+    ],
+    "keywords": [
+      "hackathon",
+      "bpmn",
+      "backlog",
+      "regras",
+      "simulacao",
+      "fila"
+    ]
+  },
+  "metadata": {
+    "title": "Backlog → BPMN → fila → TO-BE",
+    "tags": {
+      "tools": [],
+      "concepts": [
+        "business-rules",
+        "graphs",
+        "process-modeling",
+        "discrete-event-simulation"
+      ]
+    }
+  },
+  "instruction": "instruction.md",
+  "environment": {
+    "dir": "environment",
+    "install": [
+      "npm",
+      "ci",
+      "--include=dev",
+      "--no-audit",
+      "--no-fund",
+      "--ignore-scripts"
+    ],
+    "allow_internet": false,
+    "cpus": 2,
+    "memory_mb": 2048,
+    "tools": {
+      "builtin": [
+        "read",
+        "write",
+        "edit",
+        "bash",
+        "search",
+        "list",
+        "todo"
+      ],
+      "mcp": []
+    },
+    "run_egress": [
+      "model-gateway"
+    ],
+    "secrets": [],
+    "resources": {
+      "cpus": 2,
+      "memory_mb": 2048,
+      "pids": 512
+    }
+  },
+  "tests": {
+    "public": "tests/public",
+    "hidden": "tests/hidden"
+  },
+  "solution": {
+    "patch": "solution/solution.patch"
+  },
+  "editable_paths": [
+    "out/**"
+  ],
+  "protected_paths": [
+    "tests/**",
+    "casos/**",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "vitest.config.*"
+  ],
+  "verifier": {
+    "cmd": [
+      "npx",
+      "vitest",
+      "run",
+      "{tests}",
+      "--reporter=json",
+      "--outputFile={report}"
+    ],
+    "report": "vitest-json",
+    "timeout_sec": 120
+  },
+  "agent": {
+    "timeout_sec": 600
+  },
+  "est_minutes": 45
+}

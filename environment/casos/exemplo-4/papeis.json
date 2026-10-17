@@ -1,0 +1,6 @@
+{
+  "atendimento": ["Atendimento", "SAC"],
+  "estoque": ["Estoque", "almoxarifado"],
+  "financeiro": ["Financeiro", "contas a receber"],
+  "qualidade": ["Qualidade", "inspeção"]
+}

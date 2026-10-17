@@ -1,0 +1,49 @@
+{
+  "resumo": [
+    "O agente recebe um backlog.md com histórias de usuário (papel, duração, dependências, decisões, retrabalho e ajustes), um papeis.json com as raias e apelidos, um instancias.json com pedidos reais e um fila.json com pessoas e expediente por raia.",
+    "Ele faz o trabalho inteiro de um analista de processos: desenha o BPMN e acha os insights, roda cada pedido real pelo processo, simula a fila com gente e horário de verdade e mede quanto o processo otimizado (TO-BE) economiza.",
+    "Cada etapa usa a anterior, então um erro no desenho se espalha. O difícil é ler as regras à risca: história reescrita vale por inteiro, ajustes em ordem, limites inclusivos e exclusivos, retrabalho com teto e fila que respeita almoço e noite."
+  ],
+  "etapas": [
+    {
+      "nome": "1. processo",
+      "entrada": "backlog.md e papeis.json",
+      "saida": "O desenho BPMN: raias, fluxos, gateways, caminho crítico e insights de melhoria (paralelizar, aprovação redundante, gargalo, loop sem limite...)."
+    },
+    {
+      "nome": "2. instancias",
+      "entrada": "O processo da etapa 1 e instancias.json (valor de cada pedido e quantas vezes houve retrabalho)",
+      "saida": "Para cada pedido: as tarefas que de fato rodaram, em ordem, o esforço total e o tempo de ponta a ponta com gente de sobra."
+    },
+    {
+      "nome": "3. fila",
+      "entrada": "As execuções da etapa 2, a chegada de cada pedido e fila.json (pessoas e expediente por raia)",
+      "saida": "Quando cada pedido termina de verdade (dia e hora), quanto cada raia deixou trabalho esperando, a maior fila e a raia gargalo."
+    },
+    {
+      "nome": "4. to_be",
+      "entrada": "O processo e os insights da etapa 1 e os pedidos da etapa 2",
+      "saida": "O processo otimizado: o que saiu, o novo caminho crítico e quantos minutos cada pedido economiza."
+    }
+  ],
+  "exemplo-1": {
+    "titulo": "Reembolso de despesas",
+    "historia": "Um colaborador pede reembolso, anexa as notas e o financeiro confere. Reembolso acima de R$ 1.000 passa pelo gestor antes de ser pago."
+  },
+  "exemplo-2": {
+    "titulo": "Pedido de compra",
+    "historia": "Um setor pede material, compras cota fornecedores e o financeiro valida a verba. Compra a partir de R$ 5.000 passa pela gerência; depois vem o pedido, o recebimento e o pagamento."
+  },
+  "exemplo-3": {
+    "titulo": "Liberação de crédito para cliente novo",
+    "historia": "Uma loja de materiais cadastra um cliente novo, consulta o score e pede documentos. Limite até R$ 20.000 é aprovado pelo analista; acima disso vai ao comitê."
+  },
+  "exemplo-4": {
+    "titulo": "Devolução de produto da loja online",
+    "historia": "O SAC registra a devolução, o produto volta ao estoque e é inspecionado. Até 7 dias da compra há estorno; depois disso o produto vai para conserto."
+  },
+  "exemplo-5": {
+    "titulo": "Reforma residencial",
+    "historia": "Uma construtora pequena atende o cliente, visita o imóvel, orça, aprova, compra material e executa a obra até a vistoria e a entrega. São 20 histórias com ajustes no fim."
+  }
+}

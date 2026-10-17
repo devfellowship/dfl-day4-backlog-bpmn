@@ -1,0 +1,8 @@
+{
+  "expediente": ["08:00-12:00", "13:00-17:00"],
+  "raias": {
+    "colaborador": { "pessoas": 1 },
+    "financeiro": { "pessoas": 1 },
+    "gestor": { "pessoas": 1 }
+  }
+}

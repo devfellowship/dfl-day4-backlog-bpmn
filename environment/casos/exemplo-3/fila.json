@@ -1,0 +1,9 @@
+{
+  "expediente": ["08:00-12:00", "13:00-17:00"],
+  "raias": {
+    "credito": { "pessoas": 1 },
+    "diretor": { "pessoas": 1, "expediente": ["09:00-11:00", "14:00-16:00"] },
+    "expedição": { "pessoas": 1, "expediente": ["07:00-15:00"] },
+    "vendas": { "pessoas": 2 }
+  }
+}

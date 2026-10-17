@@ -1,0 +1,6 @@
+{
+  "compras": ["Compras", "setor de compras"],
+  "financeiro": ["Financeiro", "time financeiro"],
+  "gerencia": ["Gerência", "gerente"],
+  "solicitante": ["Solicitante", "requisitante"]
+}

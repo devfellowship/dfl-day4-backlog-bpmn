@@ -1,0 +1,7 @@
+{
+  "instancias": [
+    { "id": "CR-1", "chegada": "D1 08:00", "dados": { "limite": 20000 }, "retrabalhos": { "H4": 3 } },
+    { "id": "CR-2", "chegada": "D1 08:30", "dados": { "limite": 50000 }, "retrabalhos": {} },
+    { "id": "CR-3", "chegada": "D1 10:00", "dados": { "limite": 15000 }, "retrabalhos": { "H4": 1 } }
+  ]
+}

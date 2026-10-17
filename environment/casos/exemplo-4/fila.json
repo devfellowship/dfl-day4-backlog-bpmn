@@ -1,0 +1,9 @@
+{
+  "expediente": ["08:00-12:00", "13:00-17:00"],
+  "raias": {
+    "SAC": { "pessoas": 2 },
+    "estoque": { "pessoas": 1 },
+    "financeiro": { "pessoas": 1, "expediente": ["09:00-12:00", "13:00-16:00"] },
+    "qualidade": { "pessoas": 1 }
+  }
+}

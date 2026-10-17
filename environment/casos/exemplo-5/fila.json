@@ -1,0 +1,11 @@
+{
+  "expediente": ["08:00-12:00", "13:00-17:00"],
+  "raias": {
+    "comercial": { "pessoas": 1 },
+    "compras": { "pessoas": 1 },
+    "sócio": { "pessoas": 1 },
+    "engenharia": { "pessoas": 1 },
+    "financeiro": { "pessoas": 1 },
+    "equipe de obra": { "pessoas": 2, "expediente": ["07:00-12:00", "13:00-16:00"] }
+  }
+}

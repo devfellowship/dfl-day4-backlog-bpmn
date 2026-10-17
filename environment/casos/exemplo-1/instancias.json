@@ -1,0 +1,6 @@
+{
+  "instancias": [
+    { "id": "R-01", "chegada": "D1 08:00", "dados": { "valor": 1500 }, "retrabalhos": {} },
+    { "id": "R-02", "chegada": "D1 08:05", "dados": { "valor": 1000 }, "retrabalhos": {} }
+  ]
+}
