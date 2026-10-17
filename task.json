@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "task": {
+    "name": "dfl/day4-backlog-bpmn",
+    "version": "1",
+    "description": "Backlog de histórias com pequenas regras de negócio vira processo BPMN: raias por papel (com apelidos), fluxos, gateways exclusivo/paralelo/junção, caminho crítico e insights de otimização de um catálogo fechado.",
+    "authors": [
+      {
+        "name": "DFL"
+      }
+    ],
+    "keywords": [
+      "hackathon",
+      "bpmn",
+      "backlog",
+      "regras"
+    ]
+  },
+  "metadata": {
+    "title": "Backlog → BPMN com insights",
+    "tags": {
+      "tools": [],
+      "concepts": [
+        "business-rules",
+        "graphs",
+        "process-modeling"
+      ]
+    }
+  },
+  "instruction": "instruction.md",
+  "environment": {
+    "dir": "environment",
+    "install": [
+      "npm",
+      "ci",
+      "--include=dev",
+      "--no-audit",
+      "--no-fund",
+      "--ignore-scripts"
+    ],
+    "allow_internet": false,
+    "cpus": 2,
+    "memory_mb": 2048,
+    "tools": {
+      "builtin": [
+        "read",
+        "write",
+        "edit",
+        "bash",
+        "search",
+        "list",
+        "todo"
+      ],
+      "mcp": []
+    },
+    "run_egress": [
+      "model-gateway"
+    ],
+    "secrets": [],
+    "resources": {
+      "cpus": 2,
+      "memory_mb": 2048,
+      "pids": 512
+    }
+  },
+  "tests": {
+    "public": "tests/public",
+    "hidden": "tests/hidden"
+  },
+  "solution": {
+    "patch": "solution/solution.patch"
+  },
+  "editable_paths": [
+    "out/**"
+  ],
+  "protected_paths": [
+    "tests/**",
+    "casos/**",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "vitest.config.*"
+  ],
+  "verifier": {
+    "cmd": [
+      "npx",
+      "vitest",
+      "run",
+      "{tests}",
+      "--reporter=json",
+      "--outputFile={report}"
+    ],
+    "report": "vitest-json",
+    "timeout_sec": 120
+  },
+  "agent": {
+    "timeout_sec": 420
+  },
+  "est_minutes": 12
+}

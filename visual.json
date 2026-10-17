@@ -1,0 +1,90 @@
+{
+  "resumo": [
+    "O agente recebe um backlog.md com histórias de usuário (papel, duração, dependências, decisões, retrabalho e ajustes) e um papeis.json com as raias e seus apelidos.",
+    "Ele precisa produzir o processo BPMN em JSON: raias, fluxos com condição, gateways, caminho crítico em minutos e insights de otimização de um catálogo fechado.",
+    "O difícil é ler as regras à risca: história reescrita vale por inteiro, ajustes em ordem (inclusive cancelamento), limites inclusivos/exclusivos e retrabalho que não conta para nada além do próprio fluxo."
+  ],
+  "exemplo-1": {
+    "titulo": "Reembolso de despesas",
+    "historia": "Um colaborador pede reembolso, anexa as notas e o financeiro confere. Reembolso acima de R$ 1.000 passa pelo gestor antes de ser pago.",
+    "armadilhas": [
+      "Regra 6: 'acima de 1000' vira 'valor > 1000' e o senão vira 'valor <= 1000'.",
+      "Regra 9: H2 tem duas saídas sem condição (H3 e H7), então é gateway paralelo; H3 tem só saídas condicionais e não é paralelo."
+    ],
+    "resposta_explicada": [
+      "H5 é junção: recebe o senão de H3 e o depois de H4.",
+      "FIM é junção: H6 e H7 terminam sem saída.",
+      "Caminho crítico H1-H2-H3-H4-H5-H6 = 90 min (o lado do gestor é o mais longo da decisão).",
+      "handoff_excessivo [H3,H4,H5]: o caminho troca de raia 3 vezes (colaborador→financeiro→gestor→financeiro).",
+      "paralelizar [H5,H6]: H6 usa 'pedido conferido', que H5 não gera."
+    ]
+  },
+  "exemplo-2": {
+    "titulo": "Pedido de compra",
+    "historia": "Um setor pede material, compras cota fornecedores e o financeiro valida a verba. Compra a partir de R$ 5.000 passa pela gerência; depois vem o pedido, o recebimento e o pagamento.",
+    "armadilhas": [
+      "Regra 1: H2 aparece de novo no fim com 5 min; vale só a versão de baixo.",
+      "Regra 2: 'gerente', 'Gerência', 'time financeiro' e 'requisitante' são apelidos de raias.",
+      "Regra 3: o ajuste tira H1 do depois de H3, que passa a sair do INICIO.",
+      "Regra 6: 'a partir de 5000' vira '>= 5000' e o senão '< 5000'.",
+      "Regra 7: 'volta para: H8' sem limite gera loop_sem_limite e fica fora do caminho crítico."
+    ],
+    "resposta_explicada": [
+      "INICIO é gateway paralelo (H1 e H3 começam juntos).",
+      "H6 tem depois de H5 e é alvo do senão de H4: junção.",
+      "Caminho crítico começa em H3 (20 min) e não em H1+H2 (15 min) por causa da H2 refinada: total 115 min.",
+      "aprovacao_redundante [H5,H7]: os dois aprovam 'compra' na raia gerencia e H5 vem antes de H7.",
+      "handoff_excessivo com as 5 histórias que recebem troca de raia no caminho."
+    ]
+  },
+  "exemplo-3": {
+    "titulo": "Liberação de crédito para cliente novo",
+    "historia": "Uma loja de materiais cadastra um cliente novo, consulta o score e pede documentos. Limite até R$ 20.000 é aprovado pelo analista; acima disso vai ao comitê.",
+    "armadilhas": [
+      "Regra 6: 'até 20000' vira '<= 20000' e o senão '> 20000'.",
+      "Regra 7: 'volta para: H3 no máximo 2 vezes' tem limite e não gera insight.",
+      "aprovacao_redundante: H5 e H6 aprovam 'limite' na mesma raia, mas estão em lados diferentes da decisão (não há caminho entre elas).",
+      "gargalo: crédito soma 105 dos 210 min do caminho, exatamente a metade, e metade não conta."
+    ],
+    "resposta_explicada": [
+      "H3 não é junção: o retrabalho H4→H3 não conta como entrada.",
+      "H8 e H9 aprovam 'contrato' em raias diferentes: não é redundante.",
+      "paralelizar [H7,H10]: H10 usa 'cadastro', que é gerado por H1 e não por H7.",
+      "Caminho crítico passa pelo comitê (H6, 75 min): 210 min."
+    ]
+  },
+  "exemplo-4": {
+    "titulo": "Devolução de produto da loja online",
+    "historia": "O SAC registra a devolução, o produto volta ao estoque e é inspecionado. Até 7 dias da compra há estorno; depois disso o produto vai para conserto.",
+    "armadilhas": [
+      "Regra 1: a H2 refinada não tem linha 'gera', então ela não gera mais 'etiqueta'.",
+      "Regra 3: o ajuste acrescenta H3 ao depois de H8.",
+      "Regra 5: H8 cita H9, que não existe: o fluxo é ignorado e gera dependencia_quebrada.",
+      "Regra 6: 'abaixo de 8' vira 'dias < 8' e o senão 'dias >= 8'."
+    ],
+    "resposta_explicada": [
+      "paralelizar [H2,H3]: H3 usa 'etiqueta', que a H2 refinada não gera.",
+      "H4 não é paralelo: só H8 sai dele sem condição.",
+      "gargalo [qualidade]: 90 dos 140 min do caminho crítico, mais da metade.",
+      "handoff_excessivo [H3,H4,H7]: exatamente 3 trocas, e 3 já conta."
+    ]
+  },
+  "exemplo-5": {
+    "titulo": "Reforma residencial",
+    "historia": "Uma construtora pequena atende o cliente, visita o imóvel, orça, aprova, compra material e executa a obra até a vistoria e a entrega. São 20 histórias com ajustes no fim.",
+    "armadilhas": [
+      "Regra 3: H3 é cancelada e H4 herda o depois de dela (H1), sem repetir id.",
+      "Regra 5: o ajuste seguinte faz H12 depender de H3, que já foi cancelada: dependencia_quebrada.",
+      "Regra 1: H13 refinada tem 180 min, não 240.",
+      "Regra 10: H18+H19 e H20 empatam em 25 min depois de H17; vence a sequência com H18 (menor que H20).",
+      "Regra 7: H16 volta para H15 com limite (sem insight) e H8 volta para H4 sem limite (loop_sem_limite)."
+    ],
+    "resposta_explicada": [
+      "paralelizar [H1,H4]: o fluxo H1→H4 nasceu do cancelamento e H4 não usa 'briefing'.",
+      "aprovacao_redundante [H5,H8]: 'sócio' é apelido de diretoria e os dois aprovam 'orçamento'.",
+      "H11 vai para FIM porque o ajuste tirou H11 do depois de H14.",
+      "gargalo [obra]: 910 dos 1275 min do caminho crítico.",
+      "H4 não é paralelo: a única saída sem condição é H10."
+    ]
+  }
+}
